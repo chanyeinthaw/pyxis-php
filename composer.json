@@ -1,0 +1,18 @@
+{
+    "require": {
+        "illuminate/database": "^8.49",
+        "robmorgan/phinx": "^0.12.7",
+        "sunrise/http-router": "^2.7",
+        "sunrise/http-message": "^1.4",
+        "sunrise/http-server-request": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src",
+            "Driver\\": "drivers"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.3"
+    }
+}
