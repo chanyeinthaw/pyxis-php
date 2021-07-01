@@ -5,8 +5,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class IndexController implements RequestHandlerInterface {
+class NotFoundController implements RequestHandlerInterface {
     public function handle(ServerRequestInterface $request): ResponseInterface {
-        return response()->createJsonResponse(200, ['status' => 'hello']);
+        return response()->createJsonResponse(400, ['message' => 'Not Found']);
     }
 }

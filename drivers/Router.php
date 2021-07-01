@@ -2,7 +2,10 @@
 
 namespace Driver;
 
+use App\Controllers\NotFoundController;
+use App\Controllers\ServerError;
 use Psr\Http\Server\RequestHandlerInterface;
+use Sunrise\Http\Router\Exception\RouteNotFoundException;
 use Sunrise\Http\Router\Loader\CollectableFileLoader;
 use Sunrise\Http\Router\RouteCollector;
 use Sunrise\Http\Router\Router as SuniseRouter;
@@ -19,7 +22,14 @@ final class Router {
         $router->load($loader);
 
         $request = ServerRequestFactory::fromGlobals();
-        $response = $router->handle($request);
+
+        try {
+            $response = $router->handle($request);
+        } catch(RouteNotFoundException $error) {
+            $response = (new NotFoundController)->handle($request);
+        } catch(\Error $error) {
+            $response = (new ServerError($error))->handle($request);
+        }
 
         emit($response);
     }
